@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="configuracion">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="server"/>
+        <xs:sequence maxOccurs="unbounded">
+          <xs:element ref="usuario"/>
+        </xs:sequence>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="server">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="dbname"/>
+        <xs:element ref="ip"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="usuario">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="nombre"/>
+        <xs:element ref="password"/>
+        <xs:element ref="rol"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="dbname" type="xs:string"/>
+
+  <xs:element name="ip" type="xs:string"/>
+
+  <xs:element name="nombre" type="xs:string"/>
+
+  <xs:element name="password" type="xs:string"/>
+
+  <xs:element name="rol" type="xs:string"/>
+
+</xs:schema>

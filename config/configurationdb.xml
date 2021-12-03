@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuracion>
+
+    <server>
+        <dbname>db_dogs</dbname>
+        <ip>localhost</ip>
+    </server>
+    
+    <usuario>
+        <nombre>estandar</nombre>
+        <password>(u@9w0Cx3J7z/ELv</password>
+        <rol>estandar</rol>
+    </usuario>
+    
+    <usuario>
+        <nombre>admin</nombre>
+        <password>q5peM1L18FoB)4U(</password>
+        <rol>admin</rol>
+    </usuario>
+
+    <usuario>
+        <nombre>anonimo</nombre>
+        <password>n4evbIDKBqLM4GwV</password>
+        <rol>visitante</rol>
+    </usuario>
+    
+</configuracion>

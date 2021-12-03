@@ -1,0 +1,46 @@
+body {
+    background-image: url(/assets/img/fondo.jpg);
+}
+
+nav {
+    background-color: #77c1a2;
+    height: 85px;
+}
+
+  header nav {
+    display: flex;
+    text-align: center;
+    align-items: center;
+  }
+
+  .inputs{
+    
+      display: flex;
+      flex-direction: column;
+      width: 50%;
+      margin: auto;
+  }
+
+  .form-post{
+    background-color: #77c1a2;
+    padding : 20px;
+    margin: auto;
+    margin-top: 20px;
+  }
+
+  .btn-form{
+    width: 25%;
+    margin: auto;
+  }
+
+  .navbar .nav-item:not(:last-child) {
+    margin-right: 35px;
+  }
+   
+  .dropdown-toggle::after {
+     transition: transform 0.15s linear; 
+  }
+   
+  .show.dropdown .dropdown-toggle::after {
+    transform: translateY(3px);
+  }
