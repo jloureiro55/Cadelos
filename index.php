@@ -22,8 +22,6 @@
 <body class="container">
         <?php 
             require_once('header.php');
-            //session_destroy();
-            //session_unset();
         ?>
 
         <a  href="/buscar.php"> Busca a tu mascota </a>
