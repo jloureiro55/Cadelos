@@ -20,7 +20,10 @@
     $description = $datos['description'];
     $provincia = $datos['provincia'];
     
-    $imagen = "NULL";
+    $imagenes = $_FILES['file'];
+    $imagen = sizeof($imagenes['name']);
+
+    
 
     $fields="";
     if($name ==""){
@@ -59,11 +62,15 @@
         }
     }
 
+    
+
     if($_SESSION != 'visitante'){
     if($fields == ""){
         $user = json_decode($_SESSION['usuario']);
         $usuario = $user->id;
-      if($db->createPost($name,$description,$place,$usuario,$provincia,$image)){
+      if($db->createPost($name,$description,$place,$usuario,$provincia,$imagen)){
+          $id_post = $db->getLastPostId();
+        $tool->saveImgs($imagenes,$id_post);
         echo "Post creado con éxito.";
       }else{
           echo "Error a la hora de crear el post, intentelo mas tarde.";

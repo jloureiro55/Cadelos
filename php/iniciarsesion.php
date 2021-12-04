@@ -6,12 +6,12 @@
 
     $tool = new func();
 
+
     $db = new db('visitante');
 
     $credenciales = $_POST;
-
-    $result = $db->loginUser($credenciales['user']);
     
+    $result = $db->loginUser($credenciales['user']);
     if (is_array($result) && isset($result['pass'])) {
 
         $hash = $result['pass'];

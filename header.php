@@ -31,7 +31,7 @@
           <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
             <a class="dropdown-item" href="#">Preferencias</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Cerrar Sesión</a>
+            <a class="dropdown-item" id="close" href="#">Cerrar Sesión</a>
           </div>
         </li><?php }else{?>
                           <a class="nav-link" href="session.php">Sign in/Login</a>

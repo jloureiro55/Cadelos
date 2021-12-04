@@ -54,3 +54,13 @@ $('#register').click(function(){
         }
     })
 });
+
+$('#close').click(function(){
+    $.ajax({
+        url: "./php/cerrar.php",
+        success:
+        function(data){
+            window.location.href = './index.php';
+        }
+    })
+});

@@ -99,6 +99,31 @@ class functions {
         return $filled;
     }
 
+    function saveImgs($array,$id){
+        var_dump($id);
+        $nombre = 1;
+        $valido = true;
+        foreach($array['size'] as $file){
+            if($file > 10485760){
+                $valido = false;
+            }
+        }
+        if($valido){
+        if(!file_exists('../assets/uploads/'.$id)){
+            mkdir('../assets/uploads/'.$id,0777,true);
+        }
+        $uploaded=0;
+        foreach($array['tmp_name'] as $file){
+                if(move_uploaded_file($file,'../assets/uploads/'.$id."/".$nombre.".jpg")){
+                    $nombre++;
+                    $uploaded++;
+                };
+                
+            }
+        }else{
+        }
+        return $uploaded;
+    }
 }
 ?>
 

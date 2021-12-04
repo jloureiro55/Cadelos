@@ -90,16 +90,16 @@ require_once (__DIR__ . '/../../autoload.php');
             }
         }
 
-        function createPost($name,$description,$place,$usuario,$provincia,$image=NULL){
+        function createPost($name,$description,$place,$usuario,$provincia,$imagen){
             $db = $this->pdo;
-            $sql = 'INSERT INTO posts (nombre,descripcion,imagen,creador,localidad,provincia) VALUES (?,?,?,?,?,?)';
+            $sql = 'INSERT INTO posts (nombre,descripcion,creador,localidad,provincia,imagen) VALUES (?,?,?,?,?,?)';
             $insert = $db->prepare($sql);
             $insert->bindParam(1,$name);
             $insert->bindParam(2,$description);
-            $insert->bindParam(3,$image);
-            $insert->bindParam(4,$usuario);
-            $insert->bindParam(5,$place);
-            $insert->bindParam(6,$provincia);
+            $insert->bindParam(3,$usuario);
+            $insert->bindParam(4,$place);
+            $insert->bindParam(5,$provincia);
+            $insert->bindParam(6,$imagen);
             if($insert->execute()){
                 return true;
             }else{
@@ -118,7 +118,7 @@ require_once (__DIR__ . '/../../autoload.php');
     
                 $consult = $db->prepare($sql);
     
-                $consult->bindParam(':emailUser', $nameLogin);
+                $consult->bindParam(1, $nameLogin);
     
                 $consult->execute();
     
@@ -154,6 +154,44 @@ require_once (__DIR__ . '/../../autoload.php');
             }catch (Exception $ex) {
                 echo $ex->getMessage();
             }
+        }
+        function getLastPostId(){
+            $sql = "SELECT id from posts where id =  ( SELECT MAX(id) FROM posts )";
+            $db = $this->pdo;
+            $consult = $db->prepare($sql);
+            $consult->execute();
+            $result = $consult->fetch(\PDO::FETCH_ASSOC);
+            return $result['id'];
+        }
+
+        function loadFirstImg($id){
+            $sql = "SELECT imagen from posts where id = ?";
+            $db = $this->pdo;
+            $consult = $db->prepare($sql);
+            $consult->bindParam(1,$id);
+            $consult->execute();
+            $result= $consult->fetch();
+            return $result['imagen'];
+        }
+
+        function cargarPost($id){
+            $sql = "SELECT * from posts where id = ?";
+            $db = $this->pdo;
+            $consult = $db->prepare($sql);
+            $consult->bindParam(1,$id);
+            $consult->execute();
+            $result= $consult->fetch(\PDO::FETCH_ASSOC);
+            return $result;
+        }
+
+        function cargarCreador($id){
+            $sql = "SELECT * from usuarios where id = ?";
+            $db = $this->pdo;
+            $consult = $db->prepare($sql);
+            $consult->bindParam(1,$id);
+            $consult->execute();
+            $result= $consult->fetch(\PDO::FETCH_ASSOC);
+            return $result;
         }
     }
 

@@ -2,7 +2,7 @@
     require_once(__DIR__ . '/autoload.php');
 
     use \functions\functions as func;
-    use \conexion\conectDB as db;
+    use \conexion\connectDB as db;
 
     $tool = new func();
 
@@ -22,11 +22,13 @@
 <body class="container">
         <?php 
             require_once('header.php');
+            //session_destroy();
+            //session_unset();
         ?>
 
         <a  href="/buscar.php"> Busca a tu mascota </a>
 
-<div style="height: 2000px;">Hola</div>
+<div>Hola</div>
 </body>
     <script src="https://code.jquery.com/jquery-3.5.1.js"
     integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>

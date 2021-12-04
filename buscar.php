@@ -7,6 +7,10 @@
     $tool = new func();
 
     $tool->checkSession();
+
+    if($_SESSION['rol'] == 'visitante'){
+        header('location:session.php');
+    }
 ?>
 
 <!DOCTYPE html>
