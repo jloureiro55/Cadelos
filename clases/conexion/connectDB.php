@@ -193,6 +193,81 @@ require_once (__DIR__ . '/../../autoload.php');
             $result= $consult->fetch(\PDO::FETCH_ASSOC);
             return $result;
         }
+
+        function savecomment($postid,$iduser,$texto){
+            try{
+                $sql = "INSERT INTO comentarios (creador,comentario,post) VALUES (?,?,?)";
+                $db = $this->pdo;
+                $insert = $db->prepare($sql);
+                $insert->bindParam(1,$iduser);
+                $insert->bindParam(2,$texto);
+                $insert->bindParam(3,$postid);
+                if($insert->execute()){
+                    return true;
+                }else{
+                    return false;
+                }
+            }catch (Exception $ex) {
+                echo $ex->getMessage();
+                return false;
+            }
+        }
+
+        function loadcomments($post){
+            $sql = "SELECT comentarios.id,comentarios.fecha,comentarios.comentario,comentarios.positivos,comentarios.negativos,usuarios.usuario from comentarios inner join usuarios on creador = usuarios.id where post = ?";
+            $db = $this->pdo;
+            $consult = $db->prepare($sql);
+            $consult->bindParam(1,$post);
+            $consult->execute();
+            $result= $consult->fetchAll(\PDO::FETCH_ASSOC);
+            return $result;
+        }
+
+        function savevote($idpost,$iduser){
+            $db = $this->pdo;
+            try{
+                
+                $db->beginTransaction();
+                $sql = "SELECT * from votos where comentario = ? and votante = ?";
+                $consult = $db->prepare($sql);
+                $consult->bindParam(1,$idpost);
+                $consult->bindParam(2,$iduser);
+                $consult->execute();
+                $valido = true;
+                if(is_array($consult->FetchAll)){
+                    $valido = false;
+                }
+                $sql = "SELECT creador from comentarios where comentario = ?";
+                $consult = $db->prepare($sql);
+                $consult->bindParam(1,$idpost);
+                $consult->execute();
+                $creador = $consult->Fetch();
+                if(strcmp($creador,$iduser)){
+                    $valido = false;
+                }
+
+                if($existe){
+                    $sql = "INSERT INTO votos (comentario, votante) VALUES (?,?)";
+                    $consult = $db->prepare($sql);
+                    $consult->bindParam(1,$idpost);
+                    $consult->bindParam(2,$iduser);
+                    $consult->execute();
+                    $sql = "UPDATE usuarios
+                            SET votos = votos +1
+                                where (select usuarios.id from comentarios inner join usuarios on usuarios.id = comentarios.creador where comentarios.id=?";
+                    $consult->bindParam(1,$idpost);
+                    $consult->execute();
+                }
+
+
+            }catch(PDOException $ex){
+                $db->rollBack();
+                $resultado =false;
+            }
+
+            return $resultado;
+        }
+
     }
 
     

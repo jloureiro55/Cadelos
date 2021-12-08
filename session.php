@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="/estilos/style.css">
     <title>Login</title>
 </head>
-<?php require_once('header.php'); ?>
+<?php require_once('header.php');?>
 <body class="container">
     <div>
     <div>

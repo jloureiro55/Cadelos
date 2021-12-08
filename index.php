@@ -22,11 +22,12 @@
 <body class="container">
         <?php 
             require_once('header.php');
+            $db = new db($_SESSION['rol']);
+            $db->loadallposts();
         ?>
 
-        <a  href="/buscar.php"> Busca a tu mascota </a>
 
-<div>Hola</div>
+<div id="cartas" class="d-flex row justify-content-center pt-md-3"></div>
 </body>
     <script src="https://code.jquery.com/jquery-3.5.1.js"
     integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
@@ -37,4 +38,13 @@
     <script src="/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="./js/functions.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.ajax({
+                url: "php/loaddata.php",
+                success: function(data){
+                    $('#cartas').html(data);
+            }
+        })});
+    </script>
 </html>

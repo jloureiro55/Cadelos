@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-12-2021 a las 13:59:12
--- Versión del servidor: 10.4.21-MariaDB
--- Versión de PHP: 8.0.11
+-- Tiempo de generación: 08-12-2021 a las 10:55:51
+-- Versión del servidor: 10.4.17-MariaDB
+-- Versión de PHP: 7.4.13
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -38,6 +38,16 @@ CREATE TABLE `comentarios` (
   `post` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `comentarios`
+--
+
+INSERT INTO `comentarios` (`id`, `creador`, `fecha`, `localizacion`, `comentario`, `positivos`, `negativos`, `post`) VALUES
+(1, 15, '2021-12-06 19:03:54', NULL, 'proba', 0, 0, 20),
+(2, 15, '2021-12-07 20:54:35', NULL, 'Prueba 2', 0, 0, 20),
+(3, 15, '2021-12-08 00:31:58', NULL, 'proba', 0, 0, 21),
+(4, 15, '2021-12-08 00:53:10', NULL, 'Proba numero 344', 0, 0, 21);
+
 -- --------------------------------------------------------
 
 --
@@ -48,7 +58,7 @@ CREATE TABLE `posts` (
   `id` int(11) NOT NULL,
   `nombre` varchar(255) NOT NULL,
   `descripcion` text NOT NULL,
-  `imagen` blob DEFAULT NULL,
+  `imagen` int(11) DEFAULT NULL,
   `creador` int(11) NOT NULL,
   `localidad` varchar(255) NOT NULL,
   `tipo` int(1) DEFAULT NULL,
@@ -61,9 +71,9 @@ CREATE TABLE `posts` (
 --
 
 INSERT INTO `posts` (`id`, `nombre`, `descripcion`, `imagen`, `creador`, `localidad`, `tipo`, `fecha`, `provincia`) VALUES
-(4, 'Luisinho', 'Proba', NULL, 15, 'Mos', NULL, '2021-12-02 23:49:50', 'Pontevedra'),
-(5, 'Jose Carlos', 'asdasdaqs', NULL, 15, 'Porriño', NULL, '2021-12-03 02:38:31', 'Valencia'),
-(6, 'Jesuso', 'asdasdaqs', NULL, 15, 'aaaaa', NULL, '2021-12-03 03:35:44', 'Ciudad Real');
+(7, 'Firulais', 'Escapou porque e tonto perdido', NULL, 15, 'Mos', NULL, '2021-12-03 18:32:26', 'Pontevedra'),
+(20, 'Javier', 'Perdeuse', 2, 15, 'Mos', NULL, '2021-12-04 21:12:07', 'Tenerife'),
+(21, 'Jesuso', 'Proba', 1, 15, 'Na sua casa', NULL, '2021-12-08 00:27:24', 'Toledo');
 
 -- --------------------------------------------------------
 
@@ -102,15 +112,28 @@ CREATE TABLE `usuarios` (
   `provincia` varchar(255) DEFAULT NULL,
   `tipo` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `pass` varchar(255) NOT NULL
+  `pass` varchar(255) NOT NULL,
+  `votos` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`id`, `usuario`, `nombre`, `apellidos`, `telefono`, `zip`, `localidad`, `provincia`, `tipo`, `email`, `pass`) VALUES
-(15, 'Suso', 'Suso', 'Lago', 664682983, 36417, 'Mos', 'Pontevedra', '2', 'proba@proba.com', '$2y$10$GLW2tuuzsytOCWhhCP4CaemLG2Q9l9daUjN0kKVmjZSUbYt6bZ5zC');
+INSERT INTO `usuarios` (`id`, `usuario`, `nombre`, `apellidos`, `telefono`, `zip`, `localidad`, `provincia`, `tipo`, `email`, `pass`, `votos`) VALUES
+(15, 'Suso', 'Suso', 'Lago', 664682983, 36417, 'Mos', 'Pontevedra', '2', 'proba@proba.com', '$2y$10$GLW2tuuzsytOCWhhCP4CaemLG2Q9l9daUjN0kKVmjZSUbYt6bZ5zC', 0),
+(54, 'Javier', 'Javier', 'Loureiro', 664682982, 36417, 'Mos', 'Pontevedra', '2', 'javierloureiro2a@gmail.com', '$2y$10$ZV6svNCTo0lriMPPQZXH/ekjYwzsQXdW73vwCAZ03nFv6JpxW4uje', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `votos`
+--
+
+CREATE TABLE `votos` (
+  `comentario` int(11) NOT NULL,
+  `votante` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Índices para tablas volcadas
@@ -152,6 +175,13 @@ ALTER TABLE `usuarios`
   ADD UNIQUE KEY `email` (`email`);
 
 --
+-- Indices de la tabla `votos`
+--
+ALTER TABLE `votos`
+  ADD PRIMARY KEY (`comentario`,`votante`),
+  ADD KEY `votante` (`votante`);
+
+--
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
@@ -159,19 +189,19 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `comentarios`
 --
 ALTER TABLE `comentarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- Restricciones para tablas volcadas
@@ -189,6 +219,13 @@ ALTER TABLE `comentarios`
 --
 ALTER TABLE `posts`
   ADD CONSTRAINT `posts_ibfk_1` FOREIGN KEY (`creador`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `votos`
+--
+ALTER TABLE `votos`
+  ADD CONSTRAINT `votos_ibfk_1` FOREIGN KEY (`comentario`) REFERENCES `comentarios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `votos_ibfk_2` FOREIGN KEY (`votante`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -25,16 +25,32 @@
         $primera = './assets/img/placeholder.jpg';
       }
         $creador = $db->cargarCreador($post['creador']);
-        $resultado .= '<div class="post card col-4 m-2" id="'.$post['id'].'" style="width: 18rem;">
-        <img class="card-img-top p-md-2" src="'.$primera.'" alt="'.$post['nombre'].'">
-        <div class="card-body">
+        /*$resultado .= '<div class="row post card col-12 m-2" id="'.$post['id'].'"">
+        <img class="card-img-left p-md-2 col-5" src="'.$primera.'" alt="'.$post['nombre'].'">
+        <div class="card-body col-5">
           <h5 class="card-title">'.$post['nombre'].'</h5>
           <p class="card-text">Publicado por: '.$creador['usuario'].'</p>
           <p class="card-text">'.$post['provincia'].'</p>
+        
         </div>
-        <form action="post.php" method="get"><input type="hidden" name="id" value="'.$post['id'].'"><input type="submit" class="btn btn-primary" value="Visitar"></form>
-      </div>';
+      </div>';*/
+      $resultado .= '<div class="card mb-3" style="max-width: 90%;" id="'.$post['id'].'"">
+      <div class="row g-0">
+        <div class="col-md-4">
+          <img src="'.$primera.'" class="img-fluid img-responsive rounded-start" alt="'.$post['nombre'].'">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title">'.$post['nombre'].'</h5>
+            <p class="card-text">Publicado por: '.$creador['usuario'].'</p>
+            <p class="card-text">'.$post['provincia'].'</p>
+            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+            <form action="post.php" method="get"><input type="hidden" name="id" value="'.$post['id'].'"><input type="submit" class="btn btn-primary" value="Visitar"></form>
+          </div>
+        </div>
+      </div>
+    </div>';
     };
-
+    
     echo $resultado;
     ?>

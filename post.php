@@ -25,9 +25,9 @@
         <link rel="stylesheet" href="/estilos/style.css">
     </head>
     <body>
-        <?php echo '<input type="hidden" id="id-post" value="'.$_GET['id'].'">' ?>
+        <?php echo '<input type="hidden" id="id-post" class="post" value="'.$_GET['id'].'">' ?>
         <?php require_once('header.php'); ?>
-        <section class="py-5" id="post-content">
+        <section class="py-5 bg-light w-75 d-flex row m-auto" id="post-content">
             
         </section>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -41,7 +41,6 @@
         <script>
         $(document).ready(function(){
             var id = $('#id-post').val();
-            console.log(id);
             $.ajax({
                 type: 'POST',
                 data: {id : id},
@@ -50,6 +49,21 @@
                     $('#post-content').html(data);
             }
         })});
+        $(document).ready(function(){
+    var postid = $('.post').val();
+    $.ajax({
+        data : {postid : postid },
+        type: "POST",
+        url: "./php/cargarcomentarios.php",
+        success:
+        function(data){
+            $('#comentarios').html(data);
+        }
+    })
+}
+
+)
+
     </script>
     </body>
 </html>

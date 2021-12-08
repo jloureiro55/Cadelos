@@ -22,7 +22,6 @@
     $pass = $datos['pass'];
     $repass = $datos['repass'];
     $provincia = $datos['provincia'];
-    
     $passcryp = $tool->encryptionPassword($pass);
     if($tool->allfilled($datos)){
         if($tool->phone($phone) && $tool->validateEmail($email) && $pass == $repass){

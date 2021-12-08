@@ -64,3 +64,46 @@ $('#close').click(function(){
         }
     })
 });
+
+$(document).on('click','#enviarcomentario',function(){
+    var texto = $('#nuevocomentario').val();
+    var id = $('#userid').val();
+    var postid = $('.post').val();
+    $.ajax({
+        data : {texto : texto, id : id, postid : postid },
+        type: "POST",
+        url: "./php/guardarcomentario.php",
+        success:
+        function(data){
+            $('#resultado').html(data);
+        }
+    })
+})
+
+$(document).on('click','.positivo',function(){
+    var id = $(this).attr('id');
+    var iduser = $('#userid').val();
+    $.ajax({
+        data : { id : id , iduser : iduser},
+        type: "POST",
+        url: "./php/guardarvotopositivo.php",
+        success:
+        function(data){
+            $('#resultado').html(data);
+        }
+    })
+})
+
+$(document).on('click','.negativo',function(){
+    var id = $(this).attr('id');
+    var iduser = $('#userid').val();
+    $.ajax({
+        data : { id : id , iduser : iduser},
+        type: "POST",
+        url: "./php/guardarvotonegativo.php",
+        success:
+        function(data){
+            $('#resultado').html(data);
+        }
+    })
+})
