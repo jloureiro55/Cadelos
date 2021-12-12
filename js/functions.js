@@ -8,7 +8,7 @@ $('#publicar').click(function() {
         contentType: false,
         success:
         function(data){
-            $('#resultadocreacion').append(data);
+            $('#resultadocreacion').html(data);
         }
     })
 });
@@ -23,7 +23,6 @@ $('#login').click(function(){
         contentType: false,
         success:
         function(data){
-            console.log(data);
             if(data == true){
                 window.location.href = './index.php';
             }else{
@@ -44,7 +43,6 @@ $('#register').click(function(){
         contentType: false,
         success:
         function(data){
-            console.log(data);
             if(data == true){
                 window.location.href = './index.php';
             }else{
@@ -75,8 +73,21 @@ $(document).on('click','#enviarcomentario',function(){
         url: "./php/guardarcomentario.php",
         success:
         function(data){
-            $('#resultado').html(data);
+            if(!data){
+                $('#resultado').html(data);
+            }else{
+            var postid = $('.post').val();
+            $.ajax({
+                data : {postid : postid },
+                type: "POST",
+                url: "./php/cargarcomentarios.php",
+                success:
+                function(data){
+                $('#comentarios').html(data);
+                $('#nuevocomentario').val('');
         }
+    })
+        }}
     })
 })
 
@@ -87,20 +98,6 @@ $(document).on('click','.positivo',function(){
         data : { id : id , iduser : iduser},
         type: "POST",
         url: "./php/guardarvotopositivo.php",
-        success:
-        function(data){
-            $('#resultado').html(data);
-        }
-    })
-})
-
-$(document).on('click','.negativo',function(){
-    var id = $(this).attr('id');
-    var iduser = $('#userid').val();
-    $.ajax({
-        data : { id : id , iduser : iduser},
-        type: "POST",
-        url: "./php/guardarvotonegativo.php",
         success:
         function(data){
             $('#resultado').html(data);

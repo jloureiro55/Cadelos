@@ -23,7 +23,7 @@
         <?php 
             require_once('header.php');
         ?>
-        <div id="cartas" class="d-flex row justify-content-center" style="width:100%"></div>
+        <div id="cartas" class="d-flex row justify-content-center pt-md-3" style="width:100%"></div>
 </body>
     <script src="https://code.jquery.com/jquery-3.5.1.js"
     integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>

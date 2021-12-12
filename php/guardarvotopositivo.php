@@ -13,12 +13,9 @@
     $db = new db($_SESSION['rol']);
 
     $datos = $_POST;
-    echo var_dump($datos);
 
     $id = $datos['id'];
 
     $iduser = $datos['iduser'];
 
-    if($db->checkvote($id,$iduser)){
-        
-    }
+    //if($db->checkvote($id,$iduser)){};

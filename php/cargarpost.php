@@ -40,7 +40,7 @@ $post = '<div class="container px-4 px-lg-5 my-5">
                     </div>
                 </div>
             </div>
-            <div class="container w-80"><input type="text" class="form-control" placeholder="escribe un comentario" id="nuevocomentario">
+            <div class="container w-80"><input type="text" class="form-control" placeholder="Escribe un comentario" id="nuevocomentario">
                     <button href="#" id="enviarcomentario">Enviar</button>
                     <p id="resultado"></p>
             </div>

@@ -71,22 +71,22 @@
       if($db->createPost($name,$description,$place,$usuario,$provincia,$imagen)){
           $id_post = $db->getLastPostId();
         $tool->saveImgs($imagenes,$id_post);
-        echo "Post creado con éxito.";
+        $resultado = "Post creado con éxito";
       }else{
-          echo "Error a la hora de crear el post, intentelo mas tarde.";
+        $resultado = "Error a la hora de crear el post, intentelo mas tarde.";
       }
 
         
 
         
     }else{
-        echo "Error a la hora de crear el post, faltan los siguientes campos ".$fields.".";
+        $resultado = "Error a la hora de crear el post, faltan los siguientes campos ".$fields.".";
     }
 }else{
-    echo "Registrate para poder crear un post";
+    $resultado = "Registrate para poder crear un post";
 }
 
 
-
+echo $resultado;
 
 ?>

@@ -27,7 +27,7 @@
         ?>
 
 
-<div id="cartas" class="d-flex row justify-content-center pt-md-3"></div>
+<div id="cartas" class="d-flex flex-column justify-content-center pt-md-3"></div>
 </body>
     <script src="https://code.jquery.com/jquery-3.5.1.js"
     integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
@@ -44,7 +44,7 @@
                 url: "php/loaddata.php",
                 success: function(data){
                     $('#cartas').html(data);
-            }
+                }
         })});
     </script>
 </html>

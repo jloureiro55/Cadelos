@@ -1,5 +1,6 @@
 body {
-    background-image: url(/assets/img/fondo.jpg);
+    /*background-image: url(/assets/img/fondo.jpg);*/
+    background-color: beige;
 }
 
 nav {

@@ -22,11 +22,9 @@
     $iduser = $datos['id'];
     $texto = $datos['texto'];
 
-    $resultado = var_dump($datos);
-
     if($texto !=""){
         if($db->savecomment($postid,$iduser,$texto)){
-            $resultado = "Comentario añadido con éxito";
+            $resultado = true;
         }
     }else{
         $resultado = "Error al añadir el comentario";

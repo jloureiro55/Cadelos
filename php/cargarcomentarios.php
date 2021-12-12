@@ -23,7 +23,7 @@
             $resultado .= '<div class="comment mt-4 text-justify container" id="'.$comment['id'].'"> <div class="d-flex col"><img src="https://i.imgur.com/yTFUilP.jpg" alt="" class="rounded-circle img-fluid" width="40" height="40">
                 <h4>'.$comment['usuario'].'</h4></div> <span>'.$comment['fecha'].'</span>
                 <p>'.$comment['comentario'].'</p>
-                <p id="votos"> <button class="positivo" id="'.$comment['id'].'">Positivos:'.$comment['positivos'].'</button> <button class="negativo" id="'.$comment['id'].'">Negativos:'.$comment['negativos'].'</button></p>
+                <p id="votos"> <button class="positivo" id="'.$comment['id'].'">Positivos:'.$comment['positivos'].'</button></p>
             </div>';
         }
     }else{
