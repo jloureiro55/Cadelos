@@ -21,31 +21,20 @@ class email {
         $this->pass = $datos[1];
     }
 
-    /**
-     * Función que envia un corre electorinico
-     * 
-     * @param string $correo cadena de texto con la dirección del correo del usuario
-     * @param string $cuerpo cadena de texto con la información del correo
-     * @param sting $asunto cadena de texto opcional con el asunto del correo
-     * @return mixed Duelve true si el correo fue envia con exito, en caso contrario
-     * devuelve el error
-     */
+
     function enviarCorreo($correo, $cuerpo, $asunto = "") {
 
-        /*
-         * Recibe un array de direcciones de correo, el cuerpo del correo y el asunto.
-         * Envía el correo a todas las direcciones.
-         */
+
         $mail = new PHPMailer();
         $mail->IsSMTP();
-        $mail->SMTPDebug = 0;  // cambiar a 1 o 2 para ver errores
+        $mail->SMTPDebug = 0; 
         $mail->SMTPAuth = true;
         $mail->SMTPSecure = 'tls';
         $mail->Host = "smtp.gmail.com";
         $mail->Port = 587;
-        $mail->Username = $this->email;  // Cuenta del Gmail
-        $mail->Password = $this->pass; // Contraseña del Gmail          
-        $mail->SetFrom($this->email, 'Hotel Cache');
+        $mail->Username = $this->email;
+        $mail->Password = $this->pass;        
+        $mail->SetFrom($this->email, 'WhereIsMyPet');
         $mail->Subject = $asunto;
         $mail->MsgHTML($cuerpo);
         $mail->isHTML(true);
@@ -63,15 +52,7 @@ class email {
 
 
 
-    /**
-     * Función leer los datos de conexión del correo
-     * 
-     * @param sting $xml cadena de texto con la ruta del xml que contiene
-     * el nombre de usuarios y contraseña del correo
-     * @param string $xsd cadena de texto con la ruta del xsd
-     * @return array devuelve un array con los datos de
-     * @throws InvalidArgumentException
-     */
+
     function leer_configCorreo($xml, $xsd) {
 
         $config = new \DOMDocument();

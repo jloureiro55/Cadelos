@@ -3,6 +3,7 @@
 
     use \functions\functions as func;
     use \conexion\connectDB as db;
+    use \email\email as email;
 
     $tool = new func();
 
@@ -28,6 +29,11 @@
             if($db->registerUser($username,$name,$surname,$zip,$email,$provincia,$place,$phone,$passcryp)){
                 $result = $db->loginUser($email);
                 $tool->saveSessionData($result);
+                $contenido = '<h1>Bienvenido a WhereIsMyPet '.$name.' '.$surname.'!</h1>
+                <p>Esto es solo un correo de confirmación!</p>';
+        
+        $correo = new email();
+        $correo->enviarCorreo($email,$contenido,"Cuenta creada con exito");
                 $resultado=true;
             }else{
                 $resultado = 'Error al crear la cuenta comprueba que los datos sean válidos';
